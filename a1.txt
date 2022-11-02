@@ -1,0 +1,27 @@
+#step 0
+cd MOL204
+
+#step 1
+mkdir Output/
+
+#step 2
+grep "^>" -c MySequences.fasta > Output/O1_SeqNumber.txt
+
+
+#step 3
+
+echo -n "Sum flower: " >> Output/O2_SeqNumbers.txt
+grep -c "flower" MySequences.fasta >> Output/O2_SeqNumbers.txt
+
+
+echo -n "Sum animal: " >> Output/O2_SeqNumbers.txt
+grep -c "animal" MySequences.fasta >> Output/O2_SeqNumbers.txt
+
+
+echo -n "Sum bacterium: " >> Output/O2_SeqNumbers.txt
+grep -c "bacterium" MySequences.fasta >> Output/O2_SeqNumbers.txt
+
+
+#Step 4
+awk '/flower|animal/ {print; getline; print} ' MySequences.fasta  > Output/O3_Flowers_Animals_UC.txt
+sed -r -i  "s/animal|flower/\U&/g" Output/O3_Flowers_Animals_UC.txt 
